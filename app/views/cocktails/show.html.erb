@@ -1,0 +1,8 @@
+<h1><%= @coktail.name %> - Doses</h1>
+
+
+<ul>
+  <% @cocktail.doses do |dose| %>
+    <li><%= dose.description %> </li>
+  <% end %>
+</ul>

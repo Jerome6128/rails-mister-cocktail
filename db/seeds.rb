@@ -8,9 +8,11 @@
 
 require 'json'
 require 'open-uri'
+require 'faker'
 
+puts 'Ingredients seeding'
 puts 'Cleaning database...'
-# Ingredient.destroy_all
+Ingredient.destroy_all
 
 puts 'Creating ingredients..."-'
 
@@ -24,4 +26,19 @@ ingredients.each do |ingredient|
   Ingredient.create(name: ingredient['strIngredient1'])
 end
 
-puts "Finished!"
+puts 'Cocktails seeding'
+puts 'Cleaning database...'
+Cocktail.destroy_all
+
+puts 'Creating cocktails..."-'
+
+50.times { Cocktail.create(name: Faker::ProgrammingLanguage.unique.name) }
+
+url = 'https://www.thecocktaildb.com/api/json/v1/1/list.php?i=list'
+ingredients_serialized = open(url).read
+ingredients = JSON.parse(ingredients_serialized)['drinks']
+ingredients.each do |ingredient|
+  Ingredient.create(name: ingredient['strIngredient1'])
+end
+
+puts 'Finished!'
