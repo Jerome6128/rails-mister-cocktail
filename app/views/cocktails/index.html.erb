@@ -1,8 +1,8 @@
 <h1>Cocktails#index</h1>
-<p>Find me in app/views/cocktails/index.html.erb</p>
+<h2><%= link_to 'Create a new cocktail', new_cocktail_path %></h2>
 
 <ul>
   <% @cocktails.each do |cocktail| %>
-    <li><%= cocktail.name %> <%= link_to 'Description', cocktail_path('cocktail') %></li>
+    <li><%= cocktail.name %> <%= link_to 'Description', cocktail_path(cocktail) %></li>
   <% end %>
 </ul>
