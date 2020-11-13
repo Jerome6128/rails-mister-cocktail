@@ -9,10 +9,13 @@
 require 'json'
 require 'open-uri'
 require 'faker'
+Cocktail.destroy_all
+Ingredient.destroy_all
+#Dose.destroy_all
 
 puts 'Ingredients seeding'
 puts 'Cleaning database...'
-Ingredient.destroy_all
+
 
 puts 'Creating ingredients..."-'
 
@@ -27,28 +30,35 @@ end
 
 puts 'Cocktails seeding'
 puts 'Cleaning database...'
-Cocktail.destroy_all
+
 
 puts 'Creating cocktails..."-'
 
-50.times { Cocktail.create(name: Faker::ProgrammingLanguage.unique.name) }
+50.times do
+  file = URI.open('https://giantbomb1.cbsistatic.com/uploads/original/9/99864/2419866-nes_console_set.png')
+  cocktail = Cocktail.new(name: Faker::ProgrammingLanguage.unique.name)
+  cocktail.url = "ajldwzjt25gm8mts0jbz"
+  cocktail.save!
+  p cocktail
+  #cocktail.photo.attach(io: file, filename: 'nes.png', content_type: 'image/png')
+end
 
 puts 'Doses seeding'
 puts 'Cleaning database...'
-Dose.destroy_all
+
 
 puts 'Creating doses..."-'
 cocktails = Cocktail.all
 ingredients = Ingredient.all
 cocktails.each do |cocktail|
-  5.times {
+  5.times do
     description = rand(1..5)
     dose = Dose.new(description: description)
     dose.cocktail = cocktail
     ingredient = ingredients[rand(1..ingredients.length)]
     dose.ingredient = ingredient
     dose.save
-  }
+  end
 end
 
 puts 'Finished!'
