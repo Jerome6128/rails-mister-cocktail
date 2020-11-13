@@ -53,3 +53,4 @@ gem 'rspec-rails', '4.0.0.beta3', group: [ :test ]
 gem 'rails-controller-testing', group: [ :test ]
 gem 'faker'
 gem 'dotenv-rails', groups: [:development, :test]
+gem 'cloudinary', '~> 1.16.0'
